@@ -30,13 +30,26 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AndroidTrainingTheme{
-                Surface(modifier = Modifier.fillMaxSize()) {
-                    val user = User("Unmus", "Papua", 30)
-                    MenampilkanPesan(user)
-                }
+                Conversation(GenerateDataDummyUser())
             }
         }
     }
+}
+
+fun GenerateDataDummyUser(): ArrayList<User>{
+    var users: ArrayList<User> = ArrayList()
+
+    // buat objek user
+    var user: User = User("Siti", "Papua", 20)
+    users.add(user)
+
+    user = User("Maxiel", "Sorong", 30)
+    users.add(user)
+
+    user = User("Alex", "Merauke", 25)
+    users.add(user)
+
+    return users
 }
 
 data class User(
@@ -46,7 +59,7 @@ data class User(
 )
 
 @Composable
-fun MenampilkanPesan(user: User){
+fun Pesan(user: User){
     Row(
         modifier = Modifier.padding(all = 8.dp)
     ) {
@@ -79,15 +92,14 @@ fun MenampilkanPesan(user: User){
 @Composable
 fun PreviewMenampilkanPesan(){
     val user = User("Unmus", "Papua", 30)
-    MenampilkanPesan(user)
+    Pesan(user)
 }
 
-
 @Composable
-fun Conversation(users: List<User>) {
-    LazyRow {
+fun Conversation(users: ArrayList<User>){
+    LazyColumn {
         items(users) { user ->
-            MenampilkanPesan(user = user)
+            Pesan(user = user)
         }
     }
 }
