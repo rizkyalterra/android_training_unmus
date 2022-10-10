@@ -5,14 +5,13 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -46,20 +45,22 @@ data class User(
 
 @Composable
 fun MenampilkanPesan(user: User){
-    Row() {
+    Row(
+        modifier = Modifier.padding(all = 8.dp)
+    ) {
         Image(painter =
         painterResource(id = R.drawable.univmusamus),
             contentDescription = "Uni musamus",
             modifier = Modifier
                 // Set image size to 40 dp
-                .size(100.dp)
+                .size(40.dp)
                 // Clip image to be shaped as a circle
                 .clip(CircleShape)
+                .border(1.5.dp, MaterialTheme.colors.secondary, CircleShape)
         ,
         contentScale = ContentScale.Crop)
         Column() {
             Text(text = user.name)
-            Text(text = user.umur.toString())
             Text(text = user.address)
         }
     }
