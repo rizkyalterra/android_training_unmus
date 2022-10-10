@@ -18,10 +18,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.unmus.androidtraining.ui.theme.AndroidTrainingTheme
+import com.unmus.androidtraining.ui.theme.Red200
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,12 +58,19 @@ fun MenampilkanPesan(user: User){
                 .size(40.dp)
                 // Clip image to be shaped as a circle
                 .clip(CircleShape)
-                .border(1.5.dp, MaterialTheme.colors.secondary, CircleShape)
-        ,
-        contentScale = ContentScale.Crop)
+                .border(1.5.dp, MaterialTheme.colors.secondary, CircleShape),
+            contentScale = ContentScale.Crop)
+        Spacer(modifier = Modifier.width(8.dp))
         Column() {
-            Text(text = user.name)
-            Text(text = user.address)
+            Text(text = user.name, color = Red200)
+            Spacer(modifier = Modifier.height(8.dp))
+            Surface(shape = MaterialTheme.shapes.medium, elevation = 2.dp) {
+                Text(
+                    text = user.address,
+                    modifier = Modifier.padding(all = 4.dp),
+                    style = MaterialTheme.typography.body2
+                )
+            }
         }
     }
 }
