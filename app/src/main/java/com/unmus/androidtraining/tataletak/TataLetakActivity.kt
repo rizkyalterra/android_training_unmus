@@ -50,6 +50,16 @@ class TataLetakActivity : ComponentActivity() {
                             drawable = R.drawable.univmusamus
                         )
                     }
+                    Row() {
+                        FavoriteCollectionCard(
+                            text = R.string.ab1_inversions,
+                            drawable = R.drawable.univmusamus
+                        )
+                        FavoriteCollectionCard(
+                            text = R.string.ab2_inversions,
+                            drawable = R.drawable.univmusamus
+                        )
+                    }
                 }
             }
         }
@@ -84,7 +94,7 @@ fun AlignYourBodyElement(
     @DrawableRes drawable: Int,
     @StringRes text: Int,
     modifier: Modifier = Modifier){
-    Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(modifier = modifier.padding(8.dp), horizontalAlignment = Alignment.CenterHorizontally) {
         Image(
             painter = painterResource(drawable),
             contentDescription = null,
@@ -94,7 +104,34 @@ fun AlignYourBodyElement(
                 .clip(CircleShape)
         )
         Text(
-            text = stringResource(text)
+            text = stringResource(text),
+            modifier = Modifier.paddingFromBaseline(
+                top = 24.dp, bottom = 8.dp
+            )
         )
+    }
+}
+
+@Composable
+fun FavoriteCollectionCard(
+    @DrawableRes drawable: Int,
+    @StringRes text: Int,
+    modifier: Modifier = Modifier
+) {
+    Surface(shape = MaterialTheme.shapes.small, modifier = modifier) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.width(192.dp)
+        ){
+            Image(
+                painter = painterResource(id = drawable),
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.size(56.dp))
+            Text(
+                text = stringResource(id = text),
+                modifier = Modifier.padding(horizontal = 16.dp)
+            )
+        }
     }
 }
