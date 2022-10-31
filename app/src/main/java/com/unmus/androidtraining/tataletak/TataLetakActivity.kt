@@ -19,6 +19,8 @@ import com.unmus.androidtraining.R
 import com.unmus.androidtraining.ui.theme.AndroidTrainingTheme
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
@@ -32,24 +34,7 @@ class TataLetakActivity : ComponentActivity() {
             AndroidTrainingTheme{
                 Column(){
                     SearchBar()
-                    Row(){
-                        AlignYourBodyElement(
-                            text = R.string.ab1_inversions,
-                            drawable = R.drawable.univmusamus
-                        )
-                        AlignYourBodyElement(
-                            text = R.string.ab2_inversions,
-                            drawable = R.drawable.univmusamus
-                        )
-                        AlignYourBodyElement(
-                            text = R.string.ab3_inversions,
-                            drawable = R.drawable.univmusamus
-                        )
-                        AlignYourBodyElement(
-                            text = R.string.ab4_inversions,
-                            drawable = R.drawable.univmusamus
-                        )
-                    }
+                    AlignYourBodyRow()
                     Row() {
                         FavoriteCollectionCard(
                             text = R.string.ab1_inversions,
@@ -132,6 +117,40 @@ fun FavoriteCollectionCard(
                 text = stringResource(id = text),
                 modifier = Modifier.padding(horizontal = 16.dp)
             )
+        }
+    }
+}
+
+data class Body(
+    val image: Int,
+    val name: Int
+)
+
+fun generateDataBody(): ArrayList<Body>{
+    var data: ArrayList<Body> = ArrayList()
+
+    var body: Body = Body(R.drawable.univmusamus, R.string.ab1_inversions)
+    data.add(body)
+
+    body = Body(R.drawable.univmusamus, R.string.ab2_inversions)
+    data.add(body)
+
+    body = Body(R.drawable.univmusamus, R.string.ab3_inversions)
+    data.add(body)
+
+    body = Body(R.drawable.univmusamus, R.string.ab4_inversions)
+    data.add(body)
+
+    return data
+}
+
+@Composable
+fun AlignYourBodyRow(
+    modifier: Modifier = Modifier
+){
+    LazyRow(modifier = modifier) {
+        items(generateDataBody()) { item ->
+            AlignYourBodyElement( item.image, item.name)
         }
     }
 }
