@@ -35,7 +35,16 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AndroidTrainingTheme{
+                Column() {
+                    Button(onClick = {
+                        // todo
+                        val i = Intent(this@MainActivity, TataLetakActivity::class.java)
+                        startActivity(i)
+                    }) {
+
+                    }
                     Conversation(GenerateDataDummyUser())
+                }
             }
         }
     }
